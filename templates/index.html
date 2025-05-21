@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinRippr - Pin, Rip & Go</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}?v=2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class="container">
+        <h2>Pinterest Media Downloader</h2>
+        <input type="text" id="pin_url" placeholder="Paste Your Pinterest Media Link Here">
+        <button onclick="fetchMedia()">Preview Media</button>
+
+        <div id="media-container">
+            <div id="loader" class="loader" style="display: none;"></div>
+            <img id="preview_image" />
+            <img id="preview_gif" />
+            <video id="preview_video" controls>
+                <source id="video_source" src="" type="video/mp4">
+            </video>
+            <button id="download_button" onclick="downloadMedia()" disabled>Download</button>
+        </div>
+    </div>
+
+    <script>
+        function fetchMedia() {
+            let pinUrl = document.getElementById("pin_url").value;
+            const loader = document.getElementById("loader");
+            const mediaContainer = document.getElementById("media-container");
+            const previewImage = document.getElementById("preview_image");
+            const previewVideo = document.getElementById("preview_video");
+            const videoSource = document.getElementById("video_source");
+            const downloadBtn = document.getElementById("download_button");
+            const previewGif = document.getElementById("preview_gif");
+
+            // Initial reset
+            loader.style.display = "block";
+            previewImage.style.display = "none";
+            previewVideo.style.display = "none";
+            downloadBtn.style.display = "none";
+            previewGif.style.display = "none"; 
+            downloadBtn.disabled = true;
+            mediaContainer.style.display = "block";
+
+            fetch("/get_media_url", {
+                method: "POST",
+                body: new URLSearchParams({ "pin_url": pinUrl }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    loader.style.display = "none";
+                    return alert(data.error);
+                }
+
+                const mediaUrl = data.media_url;
+                const mediaType = data.media_type;
+
+                downloadBtn.setAttribute("data-media-url", mediaUrl);
+
+                if (mediaType === "video") {
+                    videoSource.src = mediaUrl;
+                    previewVideo.load();
+
+                    previewVideo.onloadeddata = () => {
+                        loader.style.display = "none";
+                        previewVideo.style.display = "block";
+                        downloadBtn.style.display = "inline-block"; 
+                        downloadBtn.disabled = false;
+                    };
+
+                } else if (mediaType === "image") {
+                    previewImage.onload = () => {
+                        loader.style.display = "none";
+                        previewImage.style.display = "block";
+                        downloadBtn.style.display = "inline-block"; 
+                        downloadBtn.disabled = false;
+                    };
+                    previewImage.src = mediaUrl;
+                
+                } else if (mediaType === "gif") {
+                    const previewGif = document.getElementById("preview_gif");
+                    previewGif.onload = () => {
+                        loader.style.display = "none";
+                        previewGif.style.display = "block";
+                        downloadBtn.style.display = "inline-block";
+                        downloadBtn.disabled = false;
+                    };
+                    previewGif.src = mediaUrl;
+                }
+                else {
+                    loader.style.display = "none";
+                    alert("Unsupported media type.");
+                    previewImage.style.display = "none";
+                    previewVideo.style.display = "none";
+                }
+            })
+            .catch(err => {
+                loader.style.display = "none";
+                alert("Error fetching media: " + err);
+            });
+        }
+
+        function downloadMedia() {
+            let mediaUrl = document.getElementById("download_button").getAttribute("data-media-url");
+            fetch("/download", {
+                method: "POST",
+                body: new URLSearchParams({ "media_url": mediaUrl }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.filename) {
+                    let link = document.createElement("a");
+                    link.href = `/download_file/${data.filename}`;
+                    link.download = data.filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    alert("Download failed.");
+                }
+            });
+        }
+</script>
+{% endblock %}
+
+</body>
+</html>

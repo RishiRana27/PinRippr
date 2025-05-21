@@ -1,0 +1,20 @@
+<body>
+    <!-- Header -->
+    <header style="text-align:center; padding: 10px; background-color: #28a745; color: white; border-radius: 0 0 10px 10px;">
+        <h1>
+        <img src="{{ url_for('static', filename='white_on_trans.png') }}" alt="PinRippr Icon" style="height: 1.2em; vertical-align: middle; margin-right: 1px;">
+        PinRippr
+        </h1>
+        <p>Download Pinterest Video, Image and Gif online instantly without Login.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main style="flex: 1;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align:center; padding: 10px; background-color: #f1f1f1; border-top: 1px solid #ccc;">
+        <p>&copy; 2025 - Made with <span style="color: red;">♥</span> by Rishi Rana.</p>
+    </footer>
+</body>
