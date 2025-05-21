@@ -1,9 +1,10 @@
 services:
   - type: web
     name: pinrippr
-    env: python
-    buildCommand: ""
-    startCommand: gunicorn app:app
-    envVars:
-      - key: FLASK_ENV
-        value: production
+    envVars: []
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    plan: free
+    branch: main
+    repo: https://github.com/RishiRana27/PinRippr
