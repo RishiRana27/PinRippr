@@ -24,9 +24,9 @@ This tool allows users to preview and download images and videos from any valid 
 
 ## 🖼️ Screenshot
 
-![PinRippr Home](1st.png)
+![PinRippr Home]Home Page(1st.png)
 ![PinRippr](2nd.png)
-![PinRippr Demo](Demo.mp4)
+![PinRippr Demo](demo.mp4)
 ---
 
 ## 🛠️ Technologies Used
