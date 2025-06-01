@@ -1,10 +1,10 @@
-<!-- Modified -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PinRippr - Download Pinterest Media Easily</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -35,7 +35,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             background-color: var(--light);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: sticky;
@@ -44,26 +44,16 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--secondary);
             text-decoration: none;
         }
 
-        .logo img {
-            height: 2rem;
-            margin-right: 0.5rem;
-        }
-
         .nav-links {
             display: flex;
             list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
@@ -71,6 +61,7 @@
             color: var(--gray);
             font-weight: 500;
             transition: color 0.3s;
+            padding: 0.5rem 1rem;
         }
 
         .nav-links a:hover {
@@ -80,14 +71,12 @@
         .nav-links .cta {
             background-color: var(--accent);
             color: var(--dark);
-            padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: background-color 0.3s;
         }
 
         .nav-links .cta:hover {
             background-color: var(--light-accent);
-            color: var(--dark);
         }
 
         .mobile-menu {
@@ -101,10 +90,11 @@
         .hero {
             display: flex;
             align-items: center;
-            padding: 5rem 5%;
+            padding: 3rem 5%;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            min-height: 80vh;
+            min-height: 50vh;
+            gap: 3rem;
         }
 
         .hero-content {
@@ -113,13 +103,13 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             margin-bottom: 2rem;
             opacity: 0.9;
         }
@@ -127,6 +117,7 @@
         .hero-buttons {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -136,6 +127,9 @@
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -162,20 +156,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
         /* Features Section */
         .features {
             padding: 5rem 5%;
@@ -188,7 +168,7 @@
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 2.5rem);
             color: var(--secondary);
             margin-bottom: 1rem;
         }
@@ -197,12 +177,15 @@
             color: var(--gray);
             max-width: 700px;
             margin: 0 auto;
+            font-size: clamp(1rem, 2vw, 1.1rem);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
@@ -231,10 +214,6 @@
             color: var(--secondary);
         }
 
-        .feature-card p {
-            color: var(--gray);
-        }
-
         /* How It Works Section */
         .how-it-works {
             padding: 5rem 5%;
@@ -252,7 +231,7 @@
         .step {
             display: flex;
             align-items: flex-start;
-            gap: 2rem;
+            gap: 1.5rem;
             background-color: var(--light);
             padding: 2rem;
             border-radius: 10px;
@@ -278,10 +257,6 @@
             color: var(--secondary);
         }
 
-        .step-content p {
-            color: var(--gray);
-        }
-
         /* Demo Section */
         .demo {
             padding: 5rem 5%;
@@ -291,7 +266,7 @@
         .demo-container {
             display: flex;
             gap: 3rem;
-            align-items: center;
+            align-items: flex-start;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -302,11 +277,19 @@
 
         .demo-content h3 {
             color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .demo-content p,
         .demo-content ul li {
             color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
         }
 
         .demo-box {
@@ -316,6 +299,7 @@
             padding: 2rem;
             color: white;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            min-height: 250px;
         }
 
         .demo-message {
@@ -324,7 +308,7 @@
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 1rem;
-            max-width: 80%;
+            max-width: 90%;
         }
 
         .demo-message.user {
@@ -333,33 +317,79 @@
             color: var(--dark);
         }
 
-        .demo-input {
+        .download-form {
             display: flex;
-            margin-top: 2rem;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .demo-input input {
-            flex: 1;
-            padding: 0.8rem;
+        .download-form input {
+            padding: 0.8rem 1rem;
             border: none;
-            border-radius: 5px 0 0 5px;
+            border-radius: 5px;
             background-color: var(--dark);
             color: var(--gray);
+            font-size: 1rem;
         }
 
-        .demo-input button {
+        .download-form input::placeholder {
+            color: var(--gray);
+            opacity: 0.7;
+        }
+
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .media-preview {
+            margin: 1rem 0;
+            text-align: center;  /* This centers inline/inline-block elements inside */
+            display: flex;       /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center;     /* Center vertically if container has height */
+            flex-direction: column;  /* Stack children vertically */
+        }
+
+        .media-preview img,
+        .media-preview video {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: block;   /* avoid inline spacing issues */
+            margin: 0 auto;   /* fallback centering */
+        }
+
+        .btn-accent {
             background-color: var(--accent);
             color: var(--dark);
             border: none;
-            padding: 0 1.5rem;
-            border-radius: 0 5px 5px 0;
-            font-weight: bold;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            width: 100%;
         }
 
-        .demo-input button:hover {
+        .btn-accent:hover:not(:disabled) {
             background-color: var(--light-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-accent:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         /* CTA Section */
@@ -371,14 +401,14 @@
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 2.5rem);
             margin-bottom: 1.5rem;
         }
 
         .cta-section p {
             max-width: 700px;
             margin: 0 auto 2rem;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             opacity: 0.9;
         }
 
@@ -394,6 +424,9 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .footer-column h3 {
@@ -449,23 +482,14 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 3rem 5%;
-            }
-
-            .hero-content {
-                margin-bottom: 3rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
+        @media (max-width: 1024px) {
             .demo-container {
                 flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .hero {
+                padding: 2rem 5%;
             }
         }
 
@@ -480,6 +504,11 @@
                 background-color: var(--light);
                 padding: 1rem;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
             }
 
             .nav-links li {
@@ -490,32 +519,92 @@
                 display: block;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 5%;
+                gap: 2rem;
             }
 
-            .section-title h2 {
-                font-size: 2rem;
+            .hero-buttons {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .features {
+                padding: 3rem 5%;
+            }
+
+            .how-it-works {
+                padding: 3rem 5%;
+            }
+
+            .demo {
+                padding: 3rem 5%;
             }
 
             .step {
                 flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .cta-section {
+                padding: 3rem 5%;
             }
         }
 
         @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2rem;
+            .navbar {
+                padding: 1rem 3%;
+            }
+
+            .hero {
+                padding: 2rem 3%;
             }
 
             .hero-buttons {
                 flex-direction: column;
-                gap: 1rem;
+                width: 100%;
             }
 
             .btn {
                 width: 100%;
                 text-align: center;
+            }
+
+            .features,
+            .how-it-works,
+            .demo,
+            .cta-section {
+                padding: 2rem 3%;
+            }
+
+            .demo-box {
+                padding: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 2rem 3% 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .demo-message {
+                max-width: 100%;
             }
         }
     </style>
@@ -523,15 +612,12 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="{% static 'images/white_on_trans.png' %}" alt="PinRippr Logo">
-            PinRippr
-        </a>
+        <a href="#" class="logo">PinRippr</a>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#demo">Demo</a></li>
-            <li><a href="#" class="cta">Try Now</a></li>
+            <li><a href="#demo" class="cta">Try Now</a></li>
         </ul>
         <div class="mobile-menu">
             <i class="fas fa-bars"></i>
@@ -541,15 +627,12 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Download Pinterest Media in Seconds</h1>
+            <h1>Download Pinterest Media in Seconds.</h1>
             <p>PinRippr lets you download videos, images, and GIFs from Pinterest without any login or hassle. Fast, simple, and free.</p>
             <div class="hero-buttons">
                 <a href="#demo" class="btn btn-primary">Try It Now</a>
                 <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="https://via.placeholder.com/600x400" alt="PinRippr in action">
         </div>
     </section>
 
@@ -573,13 +656,6 @@
                 </div>
                 <h3>No Login Required</h3>
                 <p>Download anything without creating an account or logging in to Pinterest.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3>Mobile Friendly</h3>
-                <p>Works perfectly on all devices, from smartphones to desktop computers.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -633,27 +709,37 @@
                 <h3>Experience the Simplicity</h3>
                 <p>PinRippr's intuitive interface makes downloading Pinterest content a breeze. Just paste a link and get your media in seconds.</p>
                 <p>Our tool supports all types of Pinterest media, including:</p>
-                <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                <ul>
                     <li>High-quality videos</li>
                     <li>Crystal-clear images</li>
                     <li>Animated GIFs</li>
                     <li>And more...</li>
                 </ul>
-                <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Try It Now</a>
             </div>
             <div class="demo-box">
                 <div class="demo-message">
                     <p>Welcome to PinRippr! Paste a Pinterest link below to download the media.</p>
                 </div>
-                <div class="demo-message user">
-                    <p>Here's a Pinterest link: https://pin.it/example123</p>
-                </div>
-                <div class="demo-message">
-                    <p>Great! I found a video in that link. Would you like to download it?</p>
-                </div>
-                <div class="demo-input">
-                    <input type="text" placeholder="Paste Pinterest link here...">
-                    <button>Send</button>
+                
+                <form id="pinterest-form" class="download-form">
+                    <input type="text" id="pin_url" name="pin_url" placeholder="Paste Pinterest URL here..." required>
+                    <button type="button" id="preview-btn" class="btn btn-primary">Preview Media</button>
+                </form>
+
+                <div id="media-container" style="margin-top: 20px; display: none;">
+                    <div id="loader" class="loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Loading media...
+                    </div>
+                    <div class="media-preview">
+                        <img id="preview_image" style="display: none; max-width: 100%; border-radius: 8px;"/>
+                        <img id="preview_gif" style="display: none; max-width: 100%; border-radius: 8px;"/>
+                        <video id="preview_video" controls style="display: none; max-width: 100%; border-radius: 8px;">
+                            <source id="video_source" src="" type="video/mp4">
+                        </video>
+                    </div>
+                    <button id="download_button" class="btn btn-accent" style="display: none; margin-top: 15px;" disabled>
+                        <i class="fas fa-download"></i> Download
+                    </button>
                 </div>
             </div>
         </div>
@@ -663,7 +749,7 @@
     <section class="cta-section">
         <h2>Ready to Download Pinterest Media?</h2>
         <p>Join thousands of users who save time with PinRippr every day. No registration required - start downloading now!</p>
-        <a href="#" class="btn btn-primary">Get Started for Free</a>
+        <a href="#demo" class="btn btn-primary">Get Started for Free</a>
     </section>
 
     <!-- Footer -->
@@ -673,10 +759,9 @@
                 <h3>PinRippr</h3>
                 <p>The easiest way to download media from Pinterest without any login or hassle.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/share/1FqVKAv5Pp/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/rishii.ranaa"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/RishiRana27"><i class="fab fa-github"></i></a>
                 </div>
             </div>
             <div class="footer-column">
@@ -692,41 +777,200 @@
                 <h3>Resources</h3>
                 <ul class="footer-links">
                     <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Contact Us</h3>
                 <ul class="footer-links">
-                    <li><a href="mailto:hello@pinrippr.com">hello@pinrippr.com</a></li>
-                    <li><a href="#">Support Center</a></li>
-                    <li><a href="#">Feedback</a></li>
+                    <li><a href="mailto:rishiranar27@gmail.com">rishiranar27@gmail.com</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 PinRippr. All rights reserved. Made with <i class="fas fa-heart"></i> by Rishi Rana.</p>
+            <p>© 2025 PinRippr. Made with <i class="fas fa-heart"></i> by Rishi Rana.</p>
         </div>
     </footer>
 
-    <script>
-        // Simple mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
+        <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function () {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('active');
         });
 
-        // Smooth scrolling for anchor links
+        // Smooth anchor scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelector('.nav-links').classList.remove('active');
             });
         });
-    </script>
-</body>
-</html>
+
+        // Handle form submit
+        document.getElementById('pinterest-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            fetchMedia();
+        });
+
+        document.getElementById('preview-btn').addEventListener('click', fetchMedia);
+        document.getElementById('download_button').addEventListener('click', downloadMedia);
+
+        let currentMediaData = null;
+
+        function isValidPinterestUrl(url) {
+            return /^(https?:\/\/)?(www\.)?pinterest\.(com|it)\/.+/i.test(url) ||
+                   /^https?:\/\/pin\.it\/.+$/i.test(url);
+        }
+
+        function addMessage(text, isUser) {
+            const demoBox = document.querySelector('.demo-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `demo-message ${isUser ? 'user' : ''}`;
+            messageDiv.innerHTML = `<p>${text}</p>`;
+            const form = document.getElementById('pinterest-form');
+            demoBox.insertBefore(messageDiv, form);
+            demoBox.scrollTop = demoBox.scrollHeight;
+        }
+
+        function hideAllMedia() {
+            document.getElementById('preview_image').style.display = 'none';
+            document.getElementById('preview_video').style.display = 'none';
+            document.getElementById('preview_gif').style.display = 'none';
+            document.getElementById('download_button').style.display = 'none';
+        }
+
+        function clearMessages() {
+    const demoBox = document.querySelector('.demo-box');
+    const messages = demoBox.querySelectorAll('.demo-message');
+    messages.forEach(msg => msg.remove());
+}
+
+
+        function fetchMedia() {
+            const pinUrl = document.getElementById('pin_url').value.trim();
+
+                // ✅ Clear old messages
+            clearMessages();
+
+            if (!pinUrl) {
+                addMessage('Please enter a Pinterest URL.', false);
+                return;
+            }
+
+            if (!isValidPinterestUrl(pinUrl)) {
+                addMessage('Please enter a valid Pinterest URL. Example: https://pin.it/xxxx', false);
+                return;
+            }
+
+            const loader = document.getElementById('loader');
+            const mediaContainer = document.getElementById('media-container');
+            mediaContainer.style.display = 'block';
+            loader.style.display = 'flex';
+
+            hideAllMedia();
+
+            fetch("/get_media_url", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ "pin_url": pinUrl })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    loader.style.display = 'none';
+
+                    if (data.error) {
+                        addMessage(data.error, false);
+                        return;
+                    }
+
+                    currentMediaData = data;
+
+                    displayMedia(data);
+                    addMessage(`Found ${data.media_type}! Preview ready.`, false);
+
+                    const downloadBtn = document.getElementById('download_button');
+                    downloadBtn.style.display = 'inline-block';
+                    downloadBtn.disabled = false;
+                })
+                .catch(err => {
+                    loader.style.display = 'none';
+                    addMessage("Error fetching media: " + err.message, false);
+                });
+        }
+
+        function displayMedia(data) {
+            hideAllMedia();
+
+            if (data.media_type === 'image') {
+                const img = document.getElementById('preview_image');
+                img.src = data.media_url;
+                img.alt = data.title || 'Pinterest Image';
+                img.style.display = 'block';
+            } else if (data.media_type === 'video') {
+                const video = document.getElementById('preview_video');
+                const source = document.getElementById('video_source');
+                source.src = data.media_url;
+                source.type = 'video/mp4';
+                video.load();
+                video.style.display = 'block';
+            } else if (data.media_type === 'gif') {
+                const gif = document.getElementById('preview_gif');
+                gif.src = data.media_url;
+                gif.alt = data.title || 'Pinterest GIF';
+                gif.style.display = 'block';
+            } else {
+                addMessage('Unsupported media type.', false);
+            }
+        }
+
+        function downloadMedia() {
+            if (!currentMediaData) {
+                addMessage('No media to download. Please preview first.', false);
+                return;
+            }
+
+            const downloadBtn = document.getElementById('download_button');
+            const originalText = downloadBtn.innerHTML;
+
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            downloadBtn.disabled = true;
+
+            fetch("/download", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ "media_url": currentMediaData.media_url })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.filename) {
+                        const link = document.createElement("a");
+                        link.href = `/download_file/${data.filename}`;
+                        link.download = data.filename;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else {
+                        addMessage('Download failed.', false);
+                    }
+
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+                })
+                .catch(err => {
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+                    addMessage("Error during download: " + err.message, false);
+                });
+        }
+    });
+</script>
+
+
+    <body/>
+    <html/>
