@@ -26,6 +26,9 @@ This tool allows users to preview and download images and videos from any valid 
 
 ![Home Page](1st.png)
 ![PinRippr](2nd.png)
+![PinRippr](3rd.png)
+![PinRippr](4th.png)
+![PinRippr](5th.png)
 ![Demo](Demo.mp4)
 ---
 
